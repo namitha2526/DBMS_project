@@ -1,0 +1,28 @@
+# Node.js dependencies
+node_modules/
+
+# Environment variables (if you use them)
+.env
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS & editor-specific files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Build output (if any)
+dist/
+build/
+
+# SQLite database files (if using SQLite)
+*.sqlite
+*.sqlite3
+*.db
+
+# Optional: lock files (only if needed)
+package-lock.json
