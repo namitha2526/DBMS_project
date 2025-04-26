@@ -1,0 +1,14 @@
+{
+  "name": "e-commercecatalogue",
+  "version": "1.0.0",
+  "description": "A simple product catalogue",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "init-db": "node init-db.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "sqlite3": "^5.1.7"
+  }
+}

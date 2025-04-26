@@ -1,0 +1,72 @@
+<body>
+  <h1>Product Catalogue</h1>
+  <div id="products"></div>
+
+  <h2>Your Cart 🛒</h2>
+  <div id="cart"></div>
+
+  <script>
+    // Load Products
+    fetch('/api/products')
+      .then(res => res.json())
+      .then(products => {
+        const productDiv = document.getElementById('products');
+        products.forEach(p => {
+          const item = document.createElement('div');
+          item.className = 'product';
+          item.innerHTML = `
+            <img src="${p.image}" alt="${p.name}">
+            <h2>${p.name}</h2>
+            <p>₹${p.price}</p>
+            <button onclick='addToCart(${JSON.stringify(p)})'>Add to Cart</button>
+          `;
+          productDiv.appendChild(item);
+        });
+      });
+
+    // Cart Logic
+    const getCart = () => JSON.parse(localStorage.getItem('cart') || '[]');
+
+    const saveCart = (cart) => {
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+    };
+
+    function addToCart(product) {
+      const cart = getCart();
+      const existing = cart.find(p => p.id === product.id);
+      if (existing) {
+        existing.qty++;
+      } else {
+        cart.push({ ...product, qty: 1 });
+      }
+      saveCart(cart);
+    }
+
+    function removeFromCart(id) {
+      let cart = getCart();
+      cart = cart.filter(item => item.id !== id);
+      saveCart(cart);
+    }
+
+    function renderCart() {
+      const cartDiv = document.getElementById('cart');
+      const cart = getCart();
+      if (cart.length === 0) {
+        cartDiv.innerHTML = '<p>Cart is empty 🧺</p>';
+        return;
+      }
+      cartDiv.innerHTML = '';
+      cart.forEach(item => {
+        const row = document.createElement('div');
+        row.innerHTML = `
+          <strong>${item.name}</strong> - ₹${item.price} × ${item.qty}
+          <button onclick="removeFromCart(${item.id})">❌ Remove</button>
+        `;
+        cartDiv.appendChild(row);
+      });
+    }
+
+    renderCart(); // Load cart on page load
+  </script>
+</body>
