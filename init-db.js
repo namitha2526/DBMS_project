@@ -11,7 +11,7 @@ db.serialize(() => {
       price REAL NOT NULL,
       image TEXT NOT NULL
     ) 
-  `);
+  `); 
 
   const stmt = db.prepare(`INSERT INTO products (name, price, image) VALUES (?, ?, ?)`);
   stmt.run('T-Shirt', 19.99, 'images/tshirt.jpg');
