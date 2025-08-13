@@ -10,7 +10,7 @@ db.serialize(() => {
       name TEXT NOT NULL,
       price REAL NOT NULL,
       image TEXT NOT NULL
-    ) 
+    )  
   `);   
 
   const stmt = db.prepare(`INSERT INTO products (name, price, image) VALUES (?, ?, ?)`);
