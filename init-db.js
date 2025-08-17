@@ -8,7 +8,7 @@ db.serialize(() => {
     CREATE TABLE products (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL,
-      price REAL NOT NULL,
+      price REAL NOT NULL, 
       image TEXT NOT NULL
     )   
   `);   
